@@ -9,19 +9,19 @@ import Shortened from "App/Models/Shortened";
 const shortenedFolder = "./log/shortened/";
 
 export const ShortenedService = {
-	getShortenedFolderPath() {
+	getShortenedFolderPath(): string {
 		return shortenedFolder;
 	},
 
-	setShortenedFileName(shortened_id) {
+	setShortenedFileName(shortened_id): string {
 		return `${shortened_id}.csv`;
 	},
 
-	getShortenedRelativePath(shortened_id) {
+	getShortenedRelativePath(shortened_id: number): string {
 		return `${this.getShortenedFolderPath()}${this.setShortenedFileName(shortened_id)}`;
 	},
 
-	getShortenedFullUrl(shortened_hash) {
+	getShortenedFullUrl(shortened_hash: string): string {
 		return `${Env.get("SHORTENER_DOMAIN")}/${shortened_hash}`;
 	},
 
@@ -57,9 +57,12 @@ export const ShortenedService = {
 	},
 
 	async generateShortenedLink(data) {
-		const passing = {
+		const passing: {
+			shortened_original_link: string;
+			user_ip?: string;
+		} = {
 			shortened_original_link: data.shortened_original_link,
-			user_ip: data.user_ip || null
+			user_ip: data.user_ip
 		};
 
 		try {
@@ -90,7 +93,7 @@ export const ShortenedService = {
 			const row = new Shortened();
 			row.shortenedOriginalLink = passing.shortened_original_link;
 			row.shortenedHash = random;
-			row.shortenedIp = passing.user_ip;
+			row.shortenedIp = passing.user_ip || "";
 			await row.save();
 
 			//return message
@@ -108,7 +111,9 @@ export const ShortenedService = {
 	},
 
 	async getDataFromShortenedFullUrl(data) {
-		const passing = {
+		const passing: {
+			url: string;
+		} = {
 			url: data.url
 		};
 
