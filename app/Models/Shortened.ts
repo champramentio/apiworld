@@ -21,7 +21,7 @@ export default class Shortened extends BaseModel {
 	public updatedAt: DateTime;
 
 	@computed()
-	public get shortened_url() {
+	public get shortened_link() {
 		return `${Env.get("SHORTENER_DOMAIN")}/${this.shortenedHash}`;
 	}
 }
