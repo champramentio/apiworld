@@ -5,19 +5,20 @@ import Env from "@ioc:Adonis/Core/Env";
 export default class Shortened extends BaseModel {
 	public static table = "shortened";
 
-	@column({ isPrimary: true })
+	@column({ isPrimary: true, serializeAs: null })
 	public shortenedId: number;
 
 	@column() public shortenedOriginalLink: string;
 
 	@column() public shortenedHash: string;
 
-	@column() public shortenedIp: string;
+	@column({ serializeAs: null })
+	public shortenedIp: string;
 
 	@column.dateTime({ autoCreate: true })
 	public createdAt: DateTime;
 
-	@column.dateTime({ autoCreate: true, autoUpdate: true })
+	@column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
 	public updatedAt: DateTime;
 
 	@computed()
