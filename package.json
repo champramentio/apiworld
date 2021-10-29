@@ -1,6 +1,6 @@
 {
 	"name": "apiworld",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"private": true,
 	"scripts": {
 		"build": "node ace build --production && node build/ace migration:run --force",
