@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"build": "node ace build --production",
-		"start": "node ace migration:run && nodemon build/server.js",
+		"start": "node build/ace migration:run && nodemon build/server.js",
 		"dev": "node ace serve --watch",
 		"lint": "eslint . --ext=.ts",
 		"format": "prettier --write ."

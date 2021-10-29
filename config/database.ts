@@ -5,12 +5,12 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
-import Application from '@ioc:Adonis/Core/Application'
-import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import Env from "@ioc:Adonis/Core/Env";
+import Application from "@ioc:Adonis/Core/Application";
+import { DatabaseConfig } from "@ioc:Adonis/Lucid/Database";
 
 const databaseConfig: DatabaseConfig = {
-  /*
+	/*
   |--------------------------------------------------------------------------
   | Connection
   |--------------------------------------------------------------------------
@@ -20,10 +20,10 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Env.get('DB_CONNECTION'),
+	connection: Env.get("DB_CONNECTION"),
 
-  connections: {
-    /*
+	connections: {
+		/*
     |--------------------------------------------------------------------------
     | SQLite
     |--------------------------------------------------------------------------
@@ -34,20 +34,19 @@ const databaseConfig: DatabaseConfig = {
     | npm i sqlite3
     |
     */
-    sqlite: {
-      client: 'sqlite',
-      connection: {
-        filename: Application.tmpPath('db.sqlite3'),
-      },
-      migrations: {
-        naturalSort: true,
-      },
-      useNullAsDefault: true,
-      healthCheck: false,
-      debug: false,
-    },
+		sqlite: {
+			client: "sqlite",
+			connection: {
+				filename: Application.databasePath("db.sqlite3")
+			},
+			migrations: {
+				naturalSort: true
+			},
+			useNullAsDefault: true,
+			healthCheck: false,
+			debug: false
+		}
+	}
+};
 
-  }
-}
-
-export default databaseConfig
+export default databaseConfig;
