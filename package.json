@@ -3,8 +3,8 @@
 	"version": "1.0.1",
 	"private": true,
 	"scripts": {
-		"build": "node ace build --production",
-		"start": "node build/ace migration:run && nodemon build/server.js",
+		"build": "node ace build --production && node build/ace migration:run --force",
+		"start": "nodemon build/server.js",
 		"dev": "node ace serve --watch",
 		"lint": "eslint . --ext=.ts",
 		"format": "prettier --write ."
