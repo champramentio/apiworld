@@ -31,4 +31,4 @@ Route.post("/shortened", "ShortenedController.postAdd");
 Route.get("/shortened/:shortened_hash/file", "ShortenedController.getFile").middleware("FindShortened:byShortenedParameter");
 
 //url redirect
-Route.get("/url/:shortened_hash", "ShortenedController.getRedirection").middleware("FindShortened:byShortenedParameter");
+Route.get("/:shortened_hash", "ShortenedController.getRedirection").middleware("FindShortened:byShortenedParameter");
