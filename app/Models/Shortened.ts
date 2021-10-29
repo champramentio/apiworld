@@ -5,7 +5,7 @@ import Env from "@ioc:Adonis/Core/Env";
 export default class Shortened extends BaseModel {
 	public static table = "shortened";
 
-	@column({ isPrimary: true, serializeAs: null })
+	@column({ isPrimary: true })
 	public shortenedId: number;
 
 	@column() public shortenedOriginalLink: string;
