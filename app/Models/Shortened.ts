@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, column, computed } from "@ioc:Adonis/Lucid/Orm";
+import Env from "@ioc:Adonis/Core/Env";
 
 export default class Shortened extends BaseModel {
 	public static table = "shortened";
@@ -18,4 +19,9 @@ export default class Shortened extends BaseModel {
 
 	@column.dateTime({ autoCreate: true, autoUpdate: true })
 	public updatedAt: DateTime;
+
+	@computed()
+	public get shortened_url() {
+		return `${Env.get("SHORTENER_DOMAIN")}/${this.shortenedHash}`;
+	}
 }

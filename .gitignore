@@ -8,3 +8,4 @@ tmp
 
 
 log/shortened/*
+database/db.sqlite3
