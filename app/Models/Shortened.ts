@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
-import { BaseModel, column, computed } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, column, computed, hasMany, HasMany } from "@ioc:Adonis/Lucid/Orm";
 import Env from "@ioc:Adonis/Core/Env";
+import ShortenedDetail from "App/Models/ShortenedDetail";
 
 export default class Shortened extends BaseModel {
 	public static table = "shortened";
@@ -25,4 +26,7 @@ export default class Shortened extends BaseModel {
 	public get shortened_link() {
 		return `${Env.get("SHORTENER_DOMAIN")}/${this.shortenedHash}`;
 	}
+
+	@hasMany(() => ShortenedDetail)
+	public detail: HasMany<typeof ShortenedDetail>;
 }

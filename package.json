@@ -3,8 +3,8 @@
 	"version": "1.0.6",
 	"private": true,
 	"scripts": {
-		"build": "node ace build --production && node build/ace migration:run --force",
-		"start": "nodemon build/server.js",
+		"build": "node ace build --production",
+		"start": "node server.js",
 		"dev": "node ace serve --watch",
 		"lint": "eslint . --ext=.ts",
 		"format": "prettier --write ."
@@ -28,10 +28,10 @@
 		"@adonisjs/repl": "^3.1.7",
 		"dayjs": "^1.10.7",
 		"luxon": "^2.0.2",
+		"mysql": "^2.18.1",
 		"nodemon": "^2.0.14",
 		"proxy-addr": "^2.0.7",
 		"reflect-metadata": "^0.1.13",
-		"source-map-support": "^0.5.20",
-		"sqlite3": "^5.0.2"
+		"source-map-support": "^0.5.20"
 	}
 }

@@ -1,12 +1,14 @@
 import { DateTime } from "luxon";
 import Utility from "Helpers/Utility";
 import fs from "fs";
+import Application from "@ioc:Adonis/Core/Application";
 import Database from "@ioc:Adonis/Lucid/Database";
 import Env from "@ioc:Adonis/Core/Env";
 import Shortened from "App/Models/Shortened";
+import ShortenedDetail from "App/Models/ShortenedDetail";
 
-//file path
-const shortenedFolder = "./log/shortened/";
+//file path tergantung environment
+const shortenedFolder = (Env.get("NODE_ENV") === "production" ? Application.appRoot + "/../" : "/") + "log/shortened/";
 
 export const ShortenedService = {
 	getShortenedFolderPath(): string {
@@ -40,11 +42,20 @@ export const ShortenedService = {
 			//setup file
 			const destinationFile = this.getShortenedRelativePath(passing.shortened_id);
 
+			const createdAt = DateTime.now().toFormat("yyyy-MM-dd HH:mm:ss");
+
 			//baris yang mau ditulis
-			const line = `${DateTime.now().toFormat("yyyy-MM-dd HH:mm:ss")}|${passing.user_ip}|${passing.user_agent}`;
+			const line = `${createdAt}|${passing.user_ip}|${passing.user_agent}`;
 
 			//append
 			fs.appendFileSync(destinationFile, `${line}\n`, "utf8");
+
+			//save db
+			const row = new ShortenedDetail();
+			row.userAgent = passing.user_agent;
+			row.clientIp = passing.user_ip;
+			row.shortenedId = passing.shortened_id;
+			await row.save();
 
 			//update total clicked
 			await Database.rawQuery("UPDATE shortened SET shortened_total_clicked = shortened_total_clicked + 1 WHERE shortened_id = ?", [passing.shortened_id]);
