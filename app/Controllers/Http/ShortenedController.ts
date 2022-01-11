@@ -8,7 +8,7 @@ import Utility from "Helpers/Utility";
 export default class ShortenedController {
 	public async getIndex({ response }) {
 		return response.json({
-			success: "Shorteneds have been fetched successfully",
+			success: "Shortened links have been fetched successfully",
 			data: await Shortened.all()
 		});
 	}

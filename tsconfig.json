@@ -33,5 +33,7 @@
       "@adonisjs/repl",
       "@adonisjs/lucid"
     ],
+	"removeComments": true,
+	"target": "ES2021"
   }
 }
